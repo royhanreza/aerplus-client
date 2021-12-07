@@ -11,6 +11,7 @@ import {
   Col,
   Card,
   Statistic,
+  Breadcrumb,
 } from "antd";
 import Head from "next/head";
 // import styles from "../styles/Home.module.css";
@@ -24,8 +25,10 @@ import {
   ArrowDownOutlined,
   ArrowUpOutlined,
 } from "@ant-design/icons";
-import PageLayout from "../components/layouts/Layout";
+import PageLayout from "../../components/layouts/Layout";
 import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const { Content } = Layout;
 
@@ -136,22 +139,26 @@ const routes = [
   },
 ];
 
-const Home: NextPage = () => {
+const OutletIndex: NextPage = () => {
+  const router = useRouter();
   return (
     <>
       <Head>
-        <title>Aer Plus</title>
+        <title>Aer Plus - Outlet</title>
         <meta name="description" content="Aer plus is aer plus app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
         <div style={{ padding: "0 24px", marginTop: 64 + 24 }}>
+          <Breadcrumb>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Outlet</Breadcrumb.Item>
+          </Breadcrumb>
           <PageHeader
             className="site-page-header"
-            title="Pegawai"
-            breadcrumb={{ routes }}
-            subTitle="Kelola Pegawai"
-            onBack={() => null}
+            title="Outlet"
+            subTitle="Kelola Outlet"
+            // onBack={() => null}
             style={{
               // borderBottom: "1px solid rgb(235, 237, 240)",
               // marginBottom: 24,
@@ -210,8 +217,15 @@ const Home: NextPage = () => {
               <div style={{ marginBottom: 24, textAlign: "right" }}>
                 <Space>
                   <Button icon={<DownloadOutlined />}>Export .xlsx</Button>
-                  <Button type="primary" icon={<PlusOutlined />}>
-                    Pegawai Baru
+                  <Button
+                    type="primary"
+                    onClick={() => router.push("/outlets/create")}
+                    icon={<PlusOutlined />}
+                  >
+                    {/* <Link href="/outlets/create">
+                      <a>Outlet Baru</a>
+                    </Link> */}
+                    Outlet Baru
                   </Button>
                 </Space>
               </div>
@@ -224,4 +238,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default OutletIndex;
